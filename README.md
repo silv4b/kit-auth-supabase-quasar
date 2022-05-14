@@ -10,20 +10,26 @@ yarn
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+## Configuring the project for subase
+
+In order for the project to start correctly, a project must be created and configured for email and password authentication in subase.
+
+Once the project is created, copy the supabaKey and supabaUrl and add them to the respective variables, declared in `src/boot/supabase.js`.
+
+After these modifications, the project should boot correctly, enjoy.
+
+## Start the app in development mode (hot-code reloading, error reporting, etc.)
 
 ```bash
 quasar dev
 ```
 
-### Remove/Hide menurbar from electron app (optional)
+## Remove/Hide menurbar from electron app (optional)
 
 After generate your electron app with the following command
 
 ```bash
 quasar dev -m electron
-#or
-quasar build -m electron
 ```
 
 Go to your `src-electron\electron-main.js` and add the specified line below
@@ -42,13 +48,13 @@ mainWindow = new BrowserWindow({
 });
 ```
 
-### Start the app in development mode fot windows/linux
+## Start the app in development mode fot windows/linux
 
 ```bash
 quasar dev -m electron
 ```
 
-### Lint the files
+## Lint the files
 
 ```bash
 yarn lint
@@ -56,7 +62,7 @@ yarn lint
 npm run lint
 ```
 
-### Format the files
+## Format the files
 
 ```bash
 yarn format
@@ -64,18 +70,18 @@ yarn format
 npm run format
 ```
 
-### Build the app for windows/lionux with electron
+## Build the app for windows/lionux with electron
 
 ```bash
 quasar build -m electron
 ```
 
-### Build the app for production
+## Build the app for production
 
 ```bash
 quasar build
 ```
 
-### Customize the configuration
+## Customize the configuration
 
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js).
