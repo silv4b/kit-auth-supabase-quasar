@@ -1,6 +1,4 @@
-# Quasar Store
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4112ddf4-30f4-4857-bb20-7aa0ab31e5e3/deploy-status)](https://app.netlify.com/sites/quasar-supabase-vue/deploys)
+# Quasar Store  
 
 ### Store app with Quasar Framework and Supabase (an open source Firebase alternative)
 
