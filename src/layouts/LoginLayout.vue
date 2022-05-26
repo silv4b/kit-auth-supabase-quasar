@@ -13,7 +13,7 @@
             "
             class="cursor-pointer"
           />
-          Quasar Supabase Authentication
+          Quasar Store
         </q-toolbar-title>
       </q-toolbar>
     </q-header>

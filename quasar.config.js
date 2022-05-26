@@ -8,14 +8,7 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 
-const DotEnv = require('dotenv');
-
-const webpack = require('webpack');
-
-const envparsers = require('./config/envparser');
-
 const ESLintPlugin = require('eslint-webpack-plugin');
-
 const { configure } = require('quasar/wrappers');
 const envparser = require('./config/envparser');
 
@@ -56,9 +49,17 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
     build: {
+      scopeHoisting: true,
       vueRouterMode: 'history', // available values: 'hash', 'history'
+      // env: envparser(), // desta forma é mais fáceil trabalhar de forma dinâmica com multiplos arquivos .env (localmente/dev mode)
 
-      env: envparser(), // Injecting env variables in process.env
+      // Suas variáveis de ambiente podem ser settadas aqui, via processe e setadas na UI do netlify, para serem injetadas no build do deploy. (deploy/prod mode)
+      env: {
+        SUPABASE_URL: process.env.SUPABASE_URL,
+        SUPABASE_KEY: process.env.SUPABASE_KEY,
+      },
+
+      devtool: "source-map",
 
       // transpile: false,
       // publicPath: '/',

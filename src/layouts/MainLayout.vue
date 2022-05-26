@@ -11,7 +11,7 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Main (Authenticated) Page </q-toolbar-title>
+        <q-toolbar-title> Quasar App </q-toolbar-title>
 
         <q-btn-dropdown flat color="white" icon="person">
           <q-list>
@@ -45,29 +45,20 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
-import userAuthUser from "../composables/UserAuthUser";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
 
+import EssentialLink from "components/EssentialLink.vue";
+import userAuthUser from "../composables/UserAuthUser";
+import useNotify from "src/composables/UseNotify";
+import useDialog from "src/composables/UseDialog";
+
 const linksList = [
   {
-    title: "Quasar Framework Github",
+    title: "Github",
     caption: "github.com/quasarframework",
     icon: "code",
     link: "https://github.com/quasarframework",
-  },
-  {
-    title: "Supabase Github Page",
-    caption: "github.com/supabase",
-    icon: "code",
-    link: "https://github.com/supabase",
-  },
-  {
-    title: "This Reponsitory on Github",
-    caption: "github.com/kit-auth-supabase-quasar",
-    icon: "code",
-    link: "https://github.com/silv4b/kit-auth-supabase-quasar",
   },
 ];
 
@@ -80,26 +71,33 @@ export default defineComponent({
 
   setup() {
     const leftDrawerOpen = ref(false);
-
-    const $q = useQuasar();
     const router = useRouter();
     const { logout } = userAuthUser();
+    const { notifyError, notifySuccess } = useNotify();
+    const { dialogShow } = useDialog();
 
     const handlerLogout = async () => {
-      $q.dialog({
-        title: "Sair",
-        message: "Deseja realemente sair?",
-        cancel: true,
-        persistent: true,
-      }).onOk(async () => {
-        await logout();
-        router.replace({
-          name: "login",
+      dialogShow({
+        tittle: "Sair",
+        message: "Deseja realmente sair da aplicação?",
+      })
+        .onOk(async () => {
+          try {
+            await logout();
+            notifySuccess("Bye bye! 😁");
+            router.replace({
+              name: "login",
+            });
+          } catch (error) {
+            notifyError(error.message);
+          }
+          /** o replace elimina o histórico de rotas, diferente
+           * do push, que adicionar na pilha de histórico
+           */
+        })
+        .onCancel(async () => {
+          notifySuccess("Ops, ia mas voltou! 😁");
         });
-        /* o replatece elimina o histórico de rotas,
-        diferente do push, que adicionar na pilha
-        de histórico */
-      });
     };
 
     return {

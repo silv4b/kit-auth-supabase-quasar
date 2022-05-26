@@ -2,9 +2,6 @@
 .thumbs.db
 node_modules
 
-# Env File
-.env
-
 # Quasar core related directories
 .quasar
 /dist
@@ -34,3 +31,16 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+# Environment variables
+# .env
+# .env.example
+.env.dev
+.env.prod
+
+
+# Local Netlify folder
+.netlify
+
+# Vs Code Folder
+.vscode
